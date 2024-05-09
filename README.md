@@ -63,7 +63,8 @@ entorno de escritorio con react en el frontend y nest en el backend desde 0.
 # Clonar el repositorio
 
 ```bash
-git clone https://github.com/MyLittleViruzbx1/OpenAI.git
+git clone https://github.com/MyLittleViruzbx1/OpenAI-API.git
+
 ```
 
 ### React Frontend
