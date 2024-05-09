@@ -84,3 +84,14 @@ cd nest-gpt
 npm install
 npm run start:dev
 ```
+
+### Variable de entorno
+Al archivo 
+  .env.tample
+
+cambialo a .env
+```bash
+  VITE_GPT_API=http://localhost:3000/gpt
+```
+
+Listo tendras completo el front-end

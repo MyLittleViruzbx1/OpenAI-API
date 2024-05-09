@@ -26,56 +26,93 @@
 
 [Nest](https://github.com/nestjs/nest) framework usando TypeScript .
 
-## Instalación en Dev
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/MyLittleViruzbx1/OpenAI.git
-```
-### 2. Instalar dependencias
+### Instalación
 ```bash
 $ npm install
 ```
 
 ### 3. Crear archivo .env basado en el .env.tempate
+- Cambia tu api-key - [Apy-key](https://platform.openai.com/api-keys)
+```bash
+Archivo: 
+  .env.template cambialo por .env
 
+```
 
 ### 4. Ejecutando la aplicación
 
 ```bash
-# Modo de desarrollo /development
-$ npm run start
-
 # Modo observacion / watch mode
 $ npm run start:dev
-
-# Modo de producción / production mode
-$ npm run start:prod
 ```
 
-## Test
 
+## EndPoint
+
+Los endpoints se refieren a los puntos de acceso específicos dentro de una API Nest.js que permiten a los clientes, como Postman, enviar solicitudes y recibir respuestas. 
+
+Cada endpoint está asociado con una ruta única y un método HTTP 
+
+(GET, POST, PUT, DELETE, etc.) 
+
+que define la acción que se debe realizar en el recurso.
+
+En Nest.js, los endpoints se definen utilizando controladores y métodos decorados. Los controladores agrupan endpoints relacionados, mientras que los métodos representan las acciones específicas que se pueden realizar en los recursos. Cada método debe estar decorado con el método HTTP correspondiente (por ejemplo, @Get(), @Post(), @Put(), @Delete()).
+
+```typescript
+@Controller('users')
+export class UserController {
+  @Get()
+  getUsers() {
+    // Implementación para obtener todos los usuarios
+  }
+
+  @Post()
+  createUser(@Body() user: User) {
+    // Implementación para crear un nuevo usuario
+  }
+
+  @Put(':id')
+  updateUser(@Param('id') id: string, @Body() user: User) {
+    // Implementación para actualizar un usuario existente
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    // Implementación para eliminar un usuario
+  }
+}
+
+```
+
+## Postman
+Postman es una herramienta de desarrollo de API popular que se puede utilizar para probar y depurar endpoints Nest.js. Para probar un endpoint, cree una solicitud en Postman y especifique la URL del endpoint, el método HTTP y los datos de la solicitud (si corresponde). Postman enviará la solicitud al endpoint y mostrará la respuesta.
+
+Por ejemplo, para probar el endpoint de OpenAI del ejemplo anterior, cree una solicitud POST en Postman con la siguiente URL:
 ```bash
-# unit tests
-$ npm run test
+Ortografía
+localhost:3000/gpt/orthography-check
 
-# e2e tests
-$ npm run test:e2e
+Pros y contras
+localhost:3000/gpt/pros-cons-discusser
 
-# test coverage
-$ npm run test:cov
+Stream
+localhost:3000/gpt/pros-cons-discusser-stream
+
+Traducción
+localhost:3000/gpt/translate
+
+Texto Audio
+localhost:3000/gpt/text-to-audio
+
 ```
+Postman enviará la solicitud al endpoint y mostrará una lista de todos los modelos de la API en la respuesta.
 
-## Support
+Los endpoints son componentes esenciales de las API Nest.js y Postman facilita su prueba y depuración. Al comprender cómo definir endpoints en Nest.js y cómo probarlos con Postman, puede crear API robustas y fáciles de usar.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Mantente en contacto
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Myz](https://github.com/MyLittleViruzbx1)
 
 ## License
 
