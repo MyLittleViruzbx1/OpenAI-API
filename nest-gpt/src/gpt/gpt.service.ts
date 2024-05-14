@@ -4,12 +4,11 @@ import * as fs from 'fs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import OpenAI from 'openai';
-import * as sharp from 'sharp';
 
 import {
   audioToTextUseCase,
   imageGenerationUseCase,
-  // imageVariationUseCase,
+  imageVariationUseCase,
   orthographyCheckUseCase,
   prosConsDicusserStreamUseCase,
   prosConsDicusserUseCase,
@@ -19,7 +18,7 @@ import {
 import {
   AudioToTextDto,
   ImageGenerationDto,
-  // ImageVariationDto,
+  ImageVariationDto,
   OrthographyDto,
   ProsConsDiscusserDto,
   TextToAudioDto,
@@ -98,9 +97,8 @@ export class GptService {
   }
 
 
-  // async geneateImageVariation( { baseImage }: ImageVariationDto ) {
-  //   return imageVariationUseCase( this.openai, { baseImage } );
-  // }
+  async geneateImageVariation( { baseImage }: ImageVariationDto ) {
+    return imageVariationUseCase( this.openai, { baseImage } );
+  }
 
 }
- 
