@@ -8,13 +8,7 @@ Este proyecto utiliza React para el frontend y Nest para el backend para crear u
 
 ## Resumen
 
-Esta guía es una recopilación de todos los pasos necesarios para construir un
-entorno de escritorio a partir de una instalación limpia basada en React y Nest.
-Voy a asumir que te manejas bien con sistemas operativos y sus líneas de comandos. 
-Ya que estás leyendo esto, asumiré también que sabes programar en javascript con typescript 
-y usar github para clonar el proyecto. Y las instalaciones recomendadas asi como herramientas 
-que se usaran en el proyecto. Esta guía es básicamente una descripción de cómo levantar mi
-entorno de escritorio con react en el frontend y nest en el backend desde 0.
+Esta guía es una recopilación de todos los pasos necesarios para construir un entorno de escritorio a partir de una instalación limpia basada en React y Nest. Voy a asumir que te manejas bien con sistemas operativos y sus líneas de comandos. Ya que estás leyendo esto, asumiré también que sabes programar en JavaScript con TypeScript y usar GitHub para clonar el proyecto. Y las instalaciones recomendadas así como las herramientas que se usarán en el proyecto. Esta guía es básicamente una descripción de cómo levantar mi entorno de escritorio con React en el frontend y Nest en el backend desde 0.
 
 ***Idioma***
 
