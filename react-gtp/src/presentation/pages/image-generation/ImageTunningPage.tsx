@@ -8,6 +8,7 @@ import {
   GptMessageImage,
 } from "../../components";
 import { imageGenerationUseCase } from '../../../core/use-cases';
+import { imageVariationUseCase } from "../../../core/use-cases/image-variation.use-case";
 
 interface Message {
   text: string;
@@ -24,10 +25,31 @@ export const ImageTunningPage = () => {
 
 
 const [originalImageAndMask, setoriginalImageAndMask] = useState({
-    original: 'http://localhost:3000/gpt/image-generation/1715672878663.png' as string | undefined,
+    original: 'http://localhost:3000/gpt/image-generation/1715737830653.png' as string | undefined,
     maskl: undefined as string | undefined,
 })
 
+
+const handleVariation = async() => {
+  setIsLoading(true);
+  const resp = await imageVariationUseCase( originalImageAndMask.original! );
+  setIsLoading(false);
+
+  if ( !resp )return;
+
+  setMessages( (prev) => [
+    ...prev,
+    {
+      text: 'Variación',
+      isGpt: true,
+      info: {
+        imageUrl: resp.url,
+        alt: resp.alt
+      }
+    }
+  ])
+
+}
 
   const handlePost = async (text: string) => {
     setIsLoading(true);
@@ -54,9 +76,22 @@ const [originalImageAndMask, setoriginalImageAndMask] = useState({
 
     
   };
-
   return (
-    <div className="chat-container">
+<>
+  {
+    originalImageAndMask.original && (
+      <div className="fixed flex flex-col items-center top-10 right-20 fade-in">
+        <span>Editando</span>
+        <img 
+        className="border rounded-xl w-36 h-36 object-contain"
+        src={originalImageAndMask.original} 
+        alt="Imagen Original" 
+        />
+        <button onClick={handleVariation} className="btn-primary mt-2">Generar variación</button>
+      </div>
+    )
+  }
+  <div className="chat-container">
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Bienvenida */}
@@ -88,6 +123,9 @@ const [originalImageAndMask, setoriginalImageAndMask] = useState({
         placeholder="Escribe aquí lo que deseas"
         disableCorrections
       />
-    </div>
+  </div>
+</>
+
+
   );
 };
