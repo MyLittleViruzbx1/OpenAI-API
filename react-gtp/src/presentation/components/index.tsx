@@ -1,6 +1,7 @@
 export * from './chat-bubbles/GtpMessage';
 export * from './chat-bubbles/GtpMessageImage';
 export * from './chat-bubbles/MyMessage';
+export * from './chat-bubbles/GtpMessageSelectableImage';
 export * from './chat-bubbles/GtpMessageAudio';
 export * from './chat-bubbles/GtpOrthographyMessage';
 

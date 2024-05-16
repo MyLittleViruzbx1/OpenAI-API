@@ -6,6 +6,7 @@ import {
   TypingLoader,
   TextMessageBox,
   GptMessageImage,
+  GptMessageSelectableImage,
 } from "../../components";
 import { imageGenerationUseCase } from '../../../core/use-cases';
 import { imageVariationUseCase } from "../../../core/use-cases/image-variation.use-case";
@@ -21,11 +22,21 @@ interface Message {
 
 export const ImageTunningPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+
+     isGpt:true,
+     text: 'Imagen base',
+     info: {
+      alt: 'Imagen base',
+      imageUrl:'http://localhost:3000/gpt/image-generation/1715804597420.png'
+     }
+    }
+  ]);
 
 
 const [originalImageAndMask, setoriginalImageAndMask] = useState({
-    original: 'http://localhost:3000/gpt/image-generation/1715737830653.png' as string | undefined,
+    original: undefined as string | undefined,
     maskl: undefined as string | undefined,
 })
 
@@ -55,8 +66,11 @@ const handleVariation = async() => {
     setIsLoading(true);
     setMessages((prev) => [...prev, { text: text, isGpt: false }]);
 
-    const imageInfo = await imageGenerationUseCase( text );
-    setIsLoading(false);
+    const {original, maskl } = originalImageAndMask;
+
+    const imageInfo = await imageGenerationUseCase(text, original, mask);
+
+    setIsLoading(false)
 
     if ( !imageInfo ) {
       return setMessages( (prev) => [ ...prev, { text: 'No se pudo generar la imagen', isGpt: true } ] );
@@ -84,7 +98,7 @@ const handleVariation = async() => {
         <span>Editando</span>
         <img 
         className="border rounded-xl w-36 h-36 object-contain"
-        src={originalImageAndMask.original} 
+        src={originalImageAndMask.maskl ??originalImageAndMask.original} 
         alt="Imagen Original" 
         />
         <button onClick={handleVariation} className="btn-primary mt-2">Generar variación</button>
@@ -99,12 +113,29 @@ const handleVariation = async() => {
 
           {messages.map((message, index) =>
             message.isGpt ? (
-              <GptMessageImage 
+              <GptMessageSelectableImage
                 key={index} 
                 text={ message.text }
                 imageUrl={ message.info?.imageUrl! }
                 alt={ message.info?.alt! }
+                onImageSelected={ (maskImageUrl) => setoriginalImageAndMask({
+                  original: message.info?.imageUrl,
+                  maskl: maskImageUrl
+                }) }
+                // onImageSelected={ (url) => console.log({url})}
               />
+              // <GptMessageImage 
+              //   key={index} 
+              //   text={ message.text }
+              //   imageUrl={ message.info?.imageUrl! }
+              //   alt={ message.info?.alt! }
+              //   onImageSelected={ (url) => setoriginalImageAndMask({
+              //     original: url,
+              //     mask: undefined
+              //   }
+              //   )}
+                // onImageSelected={ (url) => console.log({url})}
+              // />
             ) : (
               <MyMessage key={index} text={message.text} />
             )
