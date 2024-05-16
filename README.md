@@ -85,7 +85,8 @@ Al archivo
 
 cambialo a .env
 ```bash
-  VITE_GPT_API=http://localhost:3000/gpt
+VITE_GPT_API=http://localhost:3000/gpt
+VITE_ASSISTANT_API=http://localhost:3000/asistente
 ```
 
 Listo tendras completo el front-end
